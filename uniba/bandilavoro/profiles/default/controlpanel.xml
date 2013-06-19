@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<object
+    name="portal_controlpanel"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="uniba.bandilavoro"
+    purge="False">
+
+    <configlet
+        title="Configurazione bandi dipartimentali"
+        action_id="BandiLavoro"
+        appId="uniba.bandilavoro"
+        category="Products"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@bandilavoro-settings"
+        visible="True"
+        i18n:attributes="title">
+            <permission>Manage portal</permission>
+    </configlet>
+
+</object>

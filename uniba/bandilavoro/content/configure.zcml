@@ -1,0 +1,37 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="sangiorgio.contents">
+
+	<class class=".bando.Bando">
+		<require
+		permission="zope2.View"
+		interface="..interfaces.IBando"
+		/>
+	</class>
+	<permission
+		id="uniba.bandilavoro.AddBando"
+		title="uniba.bandilavoro: Add Bando"
+	/>
+	<class class=".profilo.Profilo">
+		<require
+		permission="zope2.View"
+		interface="..interfaces.IProfilo"
+		/>
+	</class>
+	<permission
+		id="uniba.bandilavoro.AddProfilo"
+		title="uniba.bandilavoro: Add Profilo"
+	/>
+	<class class=".rettifica.Rettifica">
+		<require
+		permission="zope2.View"
+		interface="..interfaces.IRettifica"
+		/>
+	</class>
+	<permission
+		id="uniba.bandilavoro.AddRettifica"
+		title="uniba.bandilavoro: Add Rettifica"
+	/>
+
+</configure>
