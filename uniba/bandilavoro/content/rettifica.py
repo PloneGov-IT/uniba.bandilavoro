@@ -31,7 +31,7 @@ RettificaSchema = ATFileSchema.copy() + atapi.Schema((
            vocabulary='getCampiDaRettificare',
            widget = atapi.MultiSelectionWidget(
                      label = _(u'label_rettifica_rettificapercampi', default=u'Campi da rettificare'),
-                     description = _(u'desc_rettifica_rettificapercampi', default=u'E\' selezionabile anche piu\' di un campo'),
+                     description = _(u'desc_rettifica_rettificapercampi', default=u'Non selezionare alcun campo se la rettifica riguarda l\'INTERO bando/profilo, altrimenti selezionabile un campo o piu\' '),
                      )),
 
 ))

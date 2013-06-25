@@ -6,6 +6,7 @@ from plone.registry.interfaces import IRegistry
 
 from Products.Archetypes import atapi
 from Products.Archetypes.Schema import getSchemata
+from Products.Archetypes.utils import DisplayList
 from Products.ATContentTypes.content import folder
 from Products.ATContentTypes.content import schemata
 from Products.CMFCore import permissions
@@ -18,6 +19,15 @@ from zope.interface import implements
 from zope.component import getMultiAdapter, getUtility
 
 ProfiloSchema = folder.ATFolderSchema.copy() + atapi.Schema((
+
+    atapi.IntegerField('nposti',
+            required=True,
+            searchable=False,
+            default=1,
+            validators = ('isInt',),
+            widget = atapi.IntegerWidget(
+                      label = _(u'label_profilo_nposti', default=u'Numero posti a concorso'),
+                      )),
     
     atapi.TextField('oggettoprestazione',
              required=True,
@@ -54,17 +64,19 @@ ProfiloSchema = folder.ATFolderSchema.copy() + atapi.Schema((
                               ),
                       )),
     atapi.StringField('tipoprofilo',
-           required=False,
-           searchable=True,
+           required=True,
+           searchable=False,
+           default=None,
            vocabulary='getTipoprofilo',
            widget = atapi.SelectionWidget(
                      label = _(u'label_profilo_tipoprofilo', default=u'Tipologia del profilo richiesto'),
+                     format = 'select',
                      )),
     atapi.IntegerField('durata',
             required=True,
             searchable=False,
             validators = ('isInt',),
-            widget = atapi.StringWidget(
+            widget = atapi.IntegerWidget(
                       label = _(u'label_profilo_durata', default=u'Durata del contratto'),
                        description = _(u'desc_profilo_durata',
                                                default=u'Solo un numero di tipo intero'),
@@ -72,7 +84,7 @@ ProfiloSchema = folder.ATFolderSchema.copy() + atapi.Schema((
     atapi.StringField('durataespressain',
           required=True,
           searchable=False,
-          vocabulary=(['giorni','mesi','anni']),
+          vocabulary=(('gg', 'giorni'),('mm', 'mese/1'),('aa', 'anno/i'),),
           widget = atapi.SelectionWidget(
                     label = _(u'label_profilo_durataespressain', default=u'Durata espressa in '),
                     )),
@@ -84,6 +96,31 @@ ProfiloSchema = folder.ATFolderSchema.copy() + atapi.Schema((
                     description = _(u'desc_profilo_compenso', default=u'Da inputare con punteggiatura per le sole decine, es. 10000.00'),
                     )),
 
+    # ---- SCHEMATA APPROVAZIONE ATTI ----
+     atapi.StringField('decretoapprovazioneatti',
+              schemata='approvazione',
+              required=False,
+              searchable=False,
+              widget = atapi.StringWidget(
+                        label = _(u'label_profilo_decretoapprovazioneatti', default=u'Decreto di approvazione atti'),
+                        description = _(u'desc_profilo_decretoapprovazioneatti',
+                                        default=u'E\' auspicabile inserire informazioni complete come ad esempio: DD. 80/2013'),
+                        )),
+    atapi.LinesField('vincitori',
+             schemata='approvazione',
+             required=False,
+             searchable=False,
+             widget = atapi.LinesWidget(
+                       label = _(u'label_profilo_vincitori', default=u'Nominativo/i del vincitore/i per il presente profilo'),
+                       description = _(u'desc_profilo_vincitori',
+                                       default=u'Uno per linea'),
+                       )),
+     atapi.FileField('fileapprovazioneatti',
+            schemata='approvazione',
+            required=False,
+            widget = atapi.FileWidget(
+                      label = _(u'label_profilo_fileapprovazioneatti', default=u'File decreto di approvazione atti'),
+                      )),
 ))
 
 # Set storage on fields copied from ATFolderSchema, making sure
@@ -111,10 +148,11 @@ class Profilo(folder.ATFolder):
         """ tramite questo metodo mostro i campi della presente classe 
             utile per il tipo di oggetto 'Rettifica' 
             in formato DisplayList (utile per costruire Vocabulary)"""
-        from Products.Archetypes.utils import DisplayList
         dl = DisplayList()
-        # filtro i campi della presente classe ottenendo solo quelli della schemata default
-        campi = self.schema.filterFields(schemata='default')
+        # filtro i campi della presente classe ottenendo solo quelli della schemata default e approvazione
+        campi = self.schema.getSchemataFields('default')
+        campiapprovazione = self.schema.getSchemataFields('approvazione')
+        for campo in campiapprovazione: campi.append(campo)
         # costruisco il dizionaro in DisplayList
         # testo anche se hanno l'attributo default posto
         dl.fromList([(x.getName(), x.widget.label.default) for x in campi if hasattr(x.widget.label, 'default')])
@@ -147,11 +185,21 @@ class Profilo(folder.ATFolder):
     description = atapi.ATFieldProperty('description')
 
     # ottengo le tipologie di profilo mappate dal pannello di controllo
-    def getTipoprofilo(self):
-        """ ottengo le tipologie di profilo"""
+    def getTipologiaprofilo(self):
+        """ ottengo le tipologie di profilo in formato DisplayList"""
         registry = getUtility(IRegistry)
         settings = registry.forInterface(ISettingsBandi)
         tipoprofilo = settings.settingTipoprofilo
-        return tipoprofilo
+        dl = DisplayList()
+        for x in tipoprofilo:
+            #controllo se sono e' stato usato il separatore : per definire chiave:valore
+            #in caso contrario la chiave sara' uguale al valore
+            if (len(x.split(':'))==1):
+                valorex=x.split(':')[0]
+            else:
+                valorex=x.split(':')[1]
+            
+        dl.add(x.split(':')[0],valorex)
+        return dl
 
 atapi.registerType(Profilo, PROJECTNAME)

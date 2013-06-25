@@ -7,6 +7,7 @@ from DateTime.DateTime import DateTime
 from plone.registry.interfaces import IRegistry
 
 from Products.Archetypes import atapi
+from Products.Archetypes.utils import DisplayList
 from Products.Archetypes.Schema import getSchemata
 from Products.ATContentTypes.content import folder
 from Products.ATContentTypes.content import schemata
@@ -63,10 +64,11 @@ BandoSchema = folder.ATFolderSchema.copy() + atapi.Schema((
                        )),
    atapi.StringField('tipocontratto',
             required=True,
-            searchable=True,
-            vocabulary='getTipocontratto',
+            searchable=False,
+            vocabulary='getTipologiacontratto',
             widget = atapi.SelectionWidget(
                       label = _(u'label_bando_tipocontratto', default=u'Tipologia contrattuale'),
+                      format = 'select',
                       )),
     atapi.DateTimeField('dataemanazione',
              required=True,
@@ -159,7 +161,7 @@ BandoSchema = folder.ATFolderSchema.copy() + atapi.Schema((
                       )),
     atapi.FileField('filecomponenticommissione',
            schemata='commissione',
-           required=True,
+           required=False,
            widget = atapi.FileWidget(
                      label = _(u'label_bando_filecomponenticommissione', default=u'File decreto di nomina Commissione'),
                      )),
@@ -209,19 +211,39 @@ class Bando(folder.ATFolder):
     
     # ottengo le tipologie contrattuali mappate dal pannello di controllo
     def getDipartimento(self):
-        """ ottengo la lista dei dipartimenti settata in pannello di configurazione"""
+        """ ottengo la lista dei dipartimenti settata in pannello di configurazione formato DisplayList"""
         registry = getUtility(IRegistry)
         settings = registry.forInterface(ISettingsBandi)
         dipartimenti = settings.settingDipartimenti
-        return dipartimenti
+        dl = DisplayList()
+        for x in dipartimenti:
+            #controllo se sono e' stato usato il separatore : per definire chiave:valore
+            #in caso contrario la chiave sara' uguale al valore
+            if (len(x.split(':'))==1):
+                valorex=x.split(':')[0]
+            else:
+                valorex=x.split(':')[1]
+            
+            dl.add(x.split(':')[0],valorex)
+        return dl
     
     # ottengo le tipologie contrattuali mappate dal pannello di controllo
-    def getTipocontratto(self):
+    def getTipologiacontratto(self):
         """ ottengo le tipologie contrattuali"""
         registry = getUtility(IRegistry)
         settings = registry.forInterface(ISettingsBandi)
         tipocontratto = settings.settingTipocontratto
-        return tipocontratto
+        dl = DisplayList()
+        for x in tipocontratto:
+            #controllo se sono e' stato usato il separatore : per definire chiave:valore
+            #in caso contrario la chiave sara' uguale al valore
+            if (len(x.split(':'))==1):
+                valorex=x.split(':')[0]
+            else:
+                valorex=x.split(':')[1]
+            
+        dl.add(x.split(':')[0],valorex)
+        return dl
     
     # nascondo gli schemata che non servono
     security = ClassSecurityInfo()
