@@ -216,15 +216,8 @@ class Bando(folder.ATFolder):
         settings = registry.forInterface(ISettingsBandi)
         dipartimenti = settings.settingDipartimenti
         dl = DisplayList()
-        for x in dipartimenti:
-            #controllo se sono e' stato usato il separatore : per definire chiave:valore
-            #in caso contrario la chiave sara' uguale al valore
-            if (len(x.split(':'))==1):
-                valorex=x.split(':')[0]
-            else:
-                valorex=x.split(':')[1]
-            
-            dl.add(x.split(':')[0],valorex)
+        for x in dipartimenti:            
+            dl.add(x,x)
         return dl
     
     # ottengo le tipologie contrattuali mappate dal pannello di controllo
@@ -234,15 +227,8 @@ class Bando(folder.ATFolder):
         settings = registry.forInterface(ISettingsBandi)
         tipocontratto = settings.settingTipocontratto
         dl = DisplayList()
-        for x in tipocontratto:
-            #controllo se sono e' stato usato il separatore : per definire chiave:valore
-            #in caso contrario la chiave sara' uguale al valore
-            if (len(x.split(':'))==1):
-                valorex=x.split(':')[0]
-            else:
-                valorex=x.split(':')[1]
-            
-        dl.add(x.split(':')[0],valorex)
+        for x in tipocontratto:            
+            dl.add(x,x)
         return dl
     
     # nascondo gli schemata che non servono
@@ -278,7 +264,7 @@ class Bando(folder.ATFolder):
         return nomedip+' '+numdecreto
     
     def getDefaultTime(self):
-            return DateTime()
+        return DateTime()
     
 
 atapi.registerType(Bando, PROJECTNAME)

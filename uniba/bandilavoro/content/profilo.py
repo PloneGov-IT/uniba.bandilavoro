@@ -67,7 +67,7 @@ ProfiloSchema = folder.ATFolderSchema.copy() + atapi.Schema((
            required=True,
            searchable=False,
            default=None,
-           vocabulary='getTipoprofilo',
+           vocabulary='getTipologiaprofilo',
            widget = atapi.SelectionWidget(
                      label = _(u'label_profilo_tipoprofilo', default=u'Tipologia del profilo richiesto'),
                      format = 'select',
@@ -192,14 +192,7 @@ class Profilo(folder.ATFolder):
         tipoprofilo = settings.settingTipoprofilo
         dl = DisplayList()
         for x in tipoprofilo:
-            #controllo se sono e' stato usato il separatore : per definire chiave:valore
-            #in caso contrario la chiave sara' uguale al valore
-            if (len(x.split(':'))==1):
-                valorex=x.split(':')[0]
-            else:
-                valorex=x.split(':')[1]
-            
-        dl.add(x.split(':')[0],valorex)
+            dl.add(x,x)
         return dl
 
 atapi.registerType(Profilo, PROJECTNAME)

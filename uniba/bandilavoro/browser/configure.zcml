@@ -13,5 +13,12 @@
 	    class=".controlpanel.BandiSettingsControlPanel"
 	    permission="cmf.ManagePortal"
 	    />
+
+  <browser:page
+	    name="bando_view"
+	    for="uniba.bandilavoro.interfaces.IBando"
+	    class=".views.bandoView"
+	    permission="zope2.Public"
+	    />
 	
 </configure>

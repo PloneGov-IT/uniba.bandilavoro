@@ -14,7 +14,7 @@ class BandiSettingsEditForm(controlpanel.RegistryEditForm):
 
     schema = ISettingsBandi
     label = _(u"Configurazione bandi dipartimentali")
-    description = _(u"""""")
+    description = _(u"""Gestione dei parametri di configurazione per i bandi""")
 
     def updateFields(self):
         super(BandiSettingsEditForm, self).updateFields()

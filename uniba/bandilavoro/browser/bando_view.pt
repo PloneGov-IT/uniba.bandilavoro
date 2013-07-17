@@ -1,0 +1,19 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xml:lang="it"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="uniba.bandilavoro">
+
+
+<body>
+	
+	<metal:title fill-slot="content-title" >
+		<h1 class="documentFirstHeading"
+			tal:content="string: Decreto ${context/getDecretobando}" />
+	</metal:title>
+	
+    <metal:text fill-slot="content-core" >
+        
+        
+    </metal:text>
+</body>
+</html>
