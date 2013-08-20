@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="uniba.bandilavoro"
+      tal:omit-tag="">
+
+  <body>
+    <!-- macro per la resa dei singoli campi in formato tabellare -->
+    <metal:define define-macro="renderdd">
+		<tal:ciclo repeat="campo campi">
+			<tr tal:condition="python:int(context.getField(campo).get_size(context))>0">
+				<th>
+					<span  tal:replace="python:context.getField(campo).widget.label.default" />
+					<span tal:condition="python: campo in campirettificati" class="camporettificato">*</span>
+				</th>
+				<td tal:attributes="class string:field-${campo}">
+					<metal:field use-macro="python:context.widget(campo, mode='view')" />
+				</td>
+			</tr>
+		</tal:ciclo>
+    </metal:define>
+    <!-- FINE macro per la resa dei singoli campi in formato tabellare -->
+    <!-- macro per la resa della tabella / profilo -->
+	<metal:define define-macro="renderprofili">		
+		<metal:blockprofili tal:define="profilidisponibili python:context.getFolderContents(contentFilter={'portal_type':'Profilo','sort_on':'sortable_title', 'sort_order':'ascending'})"
+			 tal:repeat="profilo profilidisponibili">
+			<div class="bandilavoro-profilo"
+			     tal:attributes="id string:profilo-${profilo/id}">
+			<table tal:define="profilobj profilo/getObject;
+			                   campiprofilorettificati profilobj/@@rettifiche/campiConRettifiche" 
+			       class="bandilavoro-table" >
+			    <caption tal:content="profilo/Title" />
+				<tr>
+                    <th>
+                        <span >N.posti</span>
+                        <span tal:condition="python: 'nposti' in campiprofilorettificati" class="camporettificato">*</span>
+                    </th>
+                    <th>
+                        <span >Tipo</span>
+                        <span tal:condition="python: 'tipoprofilo' in campiprofilorettificati" class="camporettificato">*</span>
+                    </th>
+                    <th>
+                        <span >Durata</span>
+                        <span tal:condition="python: ('durata' in campiprofilorettificati) or 
+                        ('durataespressain' in campiprofilorettificati)" class="camporettificato">*</span>
+                    </th>
+                    <th>
+                        <span >Compenso</span>
+                        <span tal:condition="python: 'compenso' in campiprofilorettificati" class="camporettificato">*</span>
+                    </th>
+				</tr>
+				<tr>
+				    <td class="field-nposti" tal:content="profilobj/nposti">posti</td>
+				    <td class="field-tipoprofilo" tal:content="profilobj/getTipoprofilo">tipo</td>
+					<td class="field-durata field-durataespressain" >
+					    <span tal:replace="string:${profilobj/getDurata} ${profilobj/getDurataespressain}" />
+					</td>
+					<td class="field-compenso" tal:content="profilobj/getCompenso">compenso</td>
+					
+				</tr>
+				<tr>
+					<th colspan="4">Oggetto della prestazione 
+					    <span tal:condition="python: 'compenso' in campiprofilorettificati" class="camporettificato">*</span>
+					</th>
+				</tr>
+				<tr>
+					<td colspan="4" class="field-oggettoprestazione"
+					    tal:content="structure profilobj/getOggettoprestazione">oggetto </td>
+				</tr>
+				<metal:blockrequisiti tal:condition="profilobj/getRequisitiprofilo">
+    				<tr>
+    					<th colspan="4">Requisiti per la partecipazione
+    					    <span tal:condition="python: 'compenso' in campiprofilorettificati" class="camporettificato">*</span>
+    					</th>
+    				</tr>
+    				<tr>
+    					<td colspan="4" class="field-requisitiprofilo" 
+    					    tal:content="structure profilobj/getRequisitiprofilo">requisiti </td>
+    				</tr>
+				</metal:blockrequisiti>
+				<metal:blockapprovazione tal:condition="profilobj/getDecretoapprovazioneatti">
+    				<tr>
+    				    <th colspan="4">Approvazione atti</th>
+    				</tr>
+    				<tr>
+    				    <td colspan="1" class="field-decretoapprovazioneatti"
+    				                    tal:content="profilobj/getDecretoapprovazioneatti">
+    				    </td>
+    				    <td colspan="3">
+				            <b>Vincitore/i:</b>
+				            <p><metal:field use-macro="python:profilobj.widget('vincitori', mode='view')" /></p>
+				            <metal:field use-macro="python:profilobj.widget('fileapprovazioneatti', mode='view')" />
+    				    </td>
+    				</tr>
+				</metal:blockapprovazione>
+			</table>
+			</div>
+		</metal:blockprofili>
+    </metal:define>
+    <!-- FINE macro per la resa della tabella / profilo -->
+
+  </body>
+</html>
+

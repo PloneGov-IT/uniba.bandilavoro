@@ -1,0 +1,54 @@
+table.bandilavoro-table {
+    width: 100%;
+    margin-top: 6px;
+}
+table.bandilavoro-table th {
+    width: 35%;
+    padding: 4px;
+    border-bottom: 2px solid #bbb;
+    vertical-align: top;
+}
+table.bandilavoro-table td {
+    padding: 4px;
+    border-bottom: 1px solid #bbb;
+    vertical-align: top;
+}
+table.bandilavoro-table caption {
+    font-weight: 600;
+    font-size: 130%;
+    text-align: left;
+    margin-top: 6px;
+    margin-bottom: 4px;
+    padding-bottom: 2px;
+    border-bottom: 2px dotted #205c90;
+    color: #205c90;
+}
+table.bandilavoro-table tr:last-child th,
+table.bandilavoro-table tr:last-child td {
+    border-bottom: none;
+}
+
+.camporettificato {
+    font-size: 18px;
+    font-weight: 600;
+    color: red;
+}
+
+#bandilavoro-colonna-dettagli {
+    background-color: #eee;
+    padding: 4px;
+}
+#bandilavoro-colonna-dettagli table.bandilavoro-table {
+    border: none;
+}
+#bandilavoro-colonna-dettagli table.bandilavoro-table th {
+    background-color: #eee;
+    border-bottom: none;
+}
+#bandilavoro-colonna-dettagli table.bandilavoro-table td {
+    border-bottom: none;
+
+}
+.campo-rettifica-title {
+    font-weight: 600;
+}
