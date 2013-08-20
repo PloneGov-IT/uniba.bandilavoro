@@ -3,17 +3,79 @@
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="uniba.bandilavoro">
 
+	<metal:slot fill-slot="style_slot">
+		<link rel="stylesheet" type="text/css" media="all" href="++resource++uniba.bandilavoro-style.css" />
+	</metal:slot>
+
 
 <body>
 	
 	<metal:title fill-slot="content-title" >
 		<h1 class="documentFirstHeading"
-			tal:content="string: Decreto ${context/getDecretobando}" />
+			tal:content="string: ${context/getDipartimentobando}, ${context/getDecretobando}" />
 	</metal:title>
+
+    <metal:text fill-slot="content-core"
+				tal:define="campirettificati context/@@rettifiche/campiConRettifiche">
+
 	
-    <metal:text fill-slot="content-core" >
-        
-        
+		<div class="cell width-10 position-0"><!-- cella con i campi principali del bando -->
+		<table id="bandilavoro-bando-campi" class="bandilavoro-table">
+			<tal:dd tal:define="campi python:('tipocontratto','strutturaservizio','modalitapresentazione','elementivalutazione','notebando')" >
+				<metal:renderdd use-macro="context/@@bandilavoro_macros/renderdd" />
+			</tal:dd>		
+	    </table>
+		<tal:blockcommissione condition="context/getComponenticommissione">
+		<table id="bandilavoro-bando-commmissione" class="bandilavoro-table">	
+		    <caption id="bandilavoro-commissioneheader">Commissione giudicatrice</caption>
+			<tal:dd tal:define="campi python:('decretonominacommissione','componenticommissione','filecomponenticommissione')" >
+				<metal:renderdd use-macro="context/@@bandilavoro_macros/renderdd" />
+			</tal:dd>
+	    </table>	
+		</tal:blockcommissione>
+		
+		<h2>Profili ricercati</h2>
+		<metal:render use-macro="context/@@bandilavoro_macros/renderprofili" />
+		
+		
+	</div><!-- FINE cella con i campi principali del bando -->
+	
+	<div class="cell width-6 position-10" id="bandilavoro-colonna-dettagli"><!-- cella con i dettagli del bando e rettifiche -->
+		<table id="bandilavoro-bando-dettagli" class="bandilavoro-table">
+			<tal:dd tal:define="campi python:('linkindagine','dataemanazione','datatermine','filedecretobando')" >
+				<metal:renderdd use-macro="context/@@bandilavoro_macros/renderdd" />
+			</tal:dd>
+		</table>
+		<tal:blockrettifiche define="lerettifiche view/oggettiDiRettifica"
+		                     condition="lerettifiche">
+			<table id="bandilavoro-rettifica" class="bandilavoro-table">
+				<caption><span class="camporettificato">* </span>Decreti di rettifica</caption>
+				<tal:block repeat="singolarettifica lerettifiche">
+					<tr tal:define="singolarettificaObj singolarettifica/getObject"
+					    tal:attributes="id string:${singolarettifica/UID}">
+					    <td>
+						<div class="campo-rettifica-title"  >
+							<a title="Download" tal:content="singolarettifica/Title"
+							   tal:attributes="href string:${singolarettifica/getPath}/at_download/file"/>
+						</div>
+						<div class="campo-rettifica-description" 
+						   tal:condition="singolarettifica/Description"
+						   tal:content="singolarettifica/Description" />
+						<span class="campo-rettifica-rettificapercampi"><b>Campi rettificati</b></span>
+						<ul>
+							<li tal:repeat="camporettificato python:singolarettificaObj.getRettificapercampi()">
+						     <span tal:define="contenitorerettifica singolarettificaObj/@@plone/getParentObject"
+							 tal:replace="python:contenitorerettifica.getField(camporettificato).widget.label.default.encode()" />
+							</li>
+						</ul>
+					    </td>
+					</tr>
+				</tal:block>
+			</table>
+		</tal:blockrettifiche>
+	</div><!-- FINE cella con i dettagli del bando e rettifiche -->
+		
+
     </metal:text>
 </body>
 </html>

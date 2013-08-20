@@ -6,7 +6,7 @@
   <property name="description"
     i18n:translate="">Bando di selezione per personale</property>
   <property name="content_meta_type">Bando</property>
-  <property name="content_icon">folder_icon.gif</property>
+  <property name="content_icon">++resource++ico-bando.png</property>
   <property name="product">uniba.bandilavoro</property>
   <property name="factory">addBando</property>
   <property name="immediate_view">atct_edit</property>
@@ -17,9 +17,9 @@
 	  <element value="Rettifica"/>
   </property>
   <property name="allow_discussion">False</property>
-  <property name="default_view">base_view</property>
+  <property name="default_view">bando_view</property>
   <property name="view_methods">
-    <element value="base_view" />
+    <element value="bando_view" />
   </property>
   <alias from="(Default)" to="(dynamic view)" />
   <alias from="edit" to="atct_edit" />

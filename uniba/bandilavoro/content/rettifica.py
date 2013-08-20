@@ -9,7 +9,7 @@ from Products.Archetypes.Schema import getSchemata
 from Products.Archetypes.utils import DisplayList
 from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
-from Products.ATContentTypes.content.file import ATFileSchema
+from Products.ATContentTypes.content.file import ATFile, ATFileSchema
 from Products.CMFCore import permissions
 
 # -*- Message Factory Imported Here -*-
@@ -25,13 +25,14 @@ from zope.component import getMultiAdapter, getUtility
 RettificaSchema = ATFileSchema.copy() + atapi.Schema((
 
     atapi.LinesField('rettificapercampi',
-           required=False,
+           required=True,
            searchable=True,
            multiValued=True,
            vocabulary='getCampiDaRettificare',
            widget = atapi.MultiSelectionWidget(
                      label = _(u'label_rettifica_rettificapercampi', default=u'Campi da rettificare'),
                      description = _(u'desc_rettifica_rettificapercampi', default=u'Non selezionare alcun campo se la rettifica riguarda l\'INTERO bando/profilo, altrimenti selezionabile un campo o piu\' '),
+                     size = 10,
                      )),
 
 ))
@@ -41,6 +42,7 @@ RettificaSchema = ATFileSchema.copy() + atapi.Schema((
 
 RettificaSchema['title'].storage = atapi.AnnotationStorage()
 RettificaSchema['description'].storage = atapi.AnnotationStorage()
+RettificaSchema['rettificapercampi'].storage = atapi.AnnotationStorage()
 
 schemata.finalizeATCTSchema(RettificaSchema, moveDiscussion=False)
 
@@ -52,9 +54,15 @@ class Rettifica(base.ATCTContent):
     meta_type = "Rettifica"
     schema = RettificaSchema
     
+    def index_html(self):
+        """ redirige sul contenitore di tipo bando 
+            richiamando il metodo mioURL presente solo in tale oggetto """
+        response = self.REQUEST.response
+        urlbando = self.mioURL()
+        return response.redirect(urlbando, status=303)
+    
     def getCampiDaRettificare(self):
         """ ottengo i campi chiamando il metodo getCampi """
-        
         return self.getCampi()
     
     # nascondo gli schemata che non servono
@@ -82,6 +90,7 @@ class Rettifica(base.ATCTContent):
 
     title = atapi.ATFieldProperty('title')
     description = atapi.ATFieldProperty('description')
+    rettificapercampi = atapi.ATFieldProperty('rettificapercampi')
 
     # -*- Your ATSchema to Python Property Bridges Here ... -*-
 

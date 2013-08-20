@@ -175,6 +175,19 @@ BandoSchema['title'].storage = atapi.AnnotationStorage()
 BandoSchema['title'].widget.visible = {'view': 'hidden', 'edit': 'hidden' }
 BandoSchema['description'].storage = atapi.AnnotationStorage()
 BandoSchema['description'].widget.visible = {'view': 'hidden', 'edit': 'hidden' }
+BandoSchema['dipartimentobando'].storage = atapi.AnnotationStorage()
+BandoSchema['linkindagine'].storage = atapi.AnnotationStorage()
+BandoSchema['strutturaservizio'].storage = atapi.AnnotationStorage()
+BandoSchema['tipocontratto'].storage = atapi.AnnotationStorage()
+BandoSchema['dataemanazione'].storage = atapi.AnnotationStorage()
+BandoSchema['datatermine'].storage = atapi.AnnotationStorage()
+BandoSchema['modalitapresentazione'].storage = atapi.AnnotationStorage()
+BandoSchema['elementivalutazione'].storage = atapi.AnnotationStorage()
+BandoSchema['filedecretobando'].storage = atapi.AnnotationStorage()
+BandoSchema['notebando'].storage = atapi.AnnotationStorage()
+BandoSchema['decretonominacommissione'].storage = atapi.AnnotationStorage()
+BandoSchema['componenticommissione'].storage = atapi.AnnotationStorage()
+BandoSchema['filecomponenticommissione'].storage = atapi.AnnotationStorage()
 
 schemata.finalizeATCTSchema(
     BandoSchema,
@@ -193,6 +206,11 @@ class Bando(folder.ATFolder):
     
     title = atapi.ATFieldProperty('title')
     description = atapi.ATFieldProperty('description')
+    
+    def mioURL(self):
+        """ tramite questo metodo restituisco l'url dell'oggetto di tipo bando
+            utile per il traversing dell'index_html della rettifica o profilo richiamato """
+        return self.absolute_url()
     
     def getCampi(self):
         """ tramite questo metodo mostro i campi della presente classe 

@@ -129,6 +129,16 @@ ProfiloSchema = folder.ATFolderSchema.copy() + atapi.Schema((
 ProfiloSchema['title'].storage = atapi.AnnotationStorage()
 ProfiloSchema['description'].storage = atapi.AnnotationStorage()
 ProfiloSchema['description'].widget.visible = {'view': 'hidden', 'edit': 'hidden' }
+ProfiloSchema['nposti'].storage = atapi.AnnotationStorage()
+ProfiloSchema['oggettoprestazione'].storage = atapi.AnnotationStorage()
+ProfiloSchema['requisitiprofilo'].storage = atapi.AnnotationStorage()
+ProfiloSchema['tipoprofilo'].storage = atapi.AnnotationStorage()
+ProfiloSchema['durata'].storage = atapi.AnnotationStorage()
+ProfiloSchema['durataespressain'].storage = atapi.AnnotationStorage()
+ProfiloSchema['compenso'].storage = atapi.AnnotationStorage()
+ProfiloSchema['decretoapprovazioneatti'].storage = atapi.AnnotationStorage()
+ProfiloSchema['vincitori'].storage = atapi.AnnotationStorage()
+ProfiloSchema['fileapprovazioneatti'].storage = atapi.AnnotationStorage()
 
 schemata.finalizeATCTSchema(
     ProfiloSchema,
@@ -143,6 +153,13 @@ class Profilo(folder.ATFolder):
 
     meta_type = "Profilo"
     schema = ProfiloSchema
+    
+    def index_html(self):
+        """ redirige sul contenitore di tipo bando 
+            richiamando il metodo mioURL presente solo in tale oggetto """
+        response = self.REQUEST.response
+        urlbando = self.mioURL()
+        return response.redirect(urlbando, status=303)
     
     def getCampi(self):
         """ tramite questo metodo mostro i campi della presente classe 
@@ -183,6 +200,7 @@ class Profilo(folder.ATFolder):
 
     title = atapi.ATFieldProperty('title')
     description = atapi.ATFieldProperty('description')
+    nposti = atapi.ATFieldProperty('nposti')
 
     # ottengo le tipologie di profilo mappate dal pannello di controllo
     def getTipologiaprofilo(self):

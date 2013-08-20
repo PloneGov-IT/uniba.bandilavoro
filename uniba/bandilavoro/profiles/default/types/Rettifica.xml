@@ -6,7 +6,7 @@
   <property name="description"
     i18n:translate="">File di rettifica al bando</property>
   <property name="content_meta_type">Rettifica</property>
-  <property name="content_icon">document_icon.gif</property>
+  <property name="content_icon">++resource++ico-info.png</property>
   <property name="product">uniba.bandilavoro</property>
   <property name="factory">addRettifica</property>
   <property name="immediate_view">atct_edit</property>

@@ -21,4 +21,29 @@
 	    permission="zope2.Public"
 	    />
 	
+   <browser:page
+      name="bandilavoro_macros"
+      for="*"
+      class=".views.Macros"
+      permission="zope2.Public" />
+
+   <browser:page
+      name="rettifiche"
+      for="*"
+      class=".views.rettifiche"
+      permission="zope2.Public" />
+
+   <browser:resource
+    	name="ico-bando.png"
+		file="ico-bando.png" />
+	<browser:resource
+	   	name="ico-profilo.png"
+		file="ico-profilo.png" />
+	<browser:resource
+	   	name="ico-info.png"
+		file="ico-info.png" />
+	<browser:resource
+	   	name="uniba.bandilavoro-style.css"
+		file="uniba.bandilavoro-style.css" />
+		
 </configure>

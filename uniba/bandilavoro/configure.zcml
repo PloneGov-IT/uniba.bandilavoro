@@ -2,6 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="uniba.bandilavoro">
 
@@ -19,6 +20,12 @@
       description="Installs the uniba.bandilavoro package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-  <!-- -*- extra stuff goes here -*- -->
   
+	<!--
+	<subscriber
+	  for=".interfaces.IRettifica
+	       Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+	  handler=".eventhandlers.afterRettifica"
+	  />
+	-->
 </configure>
