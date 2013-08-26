@@ -35,6 +35,12 @@ class bandoView(BrowserView):
         results = catalog(path={'query': folder_path, 'depth': 2}, portal_type='Rettifica', sort_on='effective', sort_order='descending')
         return results
         
+    def allegatiAlBando(self):
+        """ ritorna la lista di tutti gli oggetti di tipo files presenti nella cartella del bando """
+        context=self.context
+        brains = context.getFolderContents(contentFilter={'portal_type':'File', 'sort_on':'effective', 'sort_order':'descending'})
+        return brains
+        
 class Macros(BrowserView):
     """ macros utili per i bandi """
     template = ViewPageTemplateFile('bandilavoro_macros.pt')
