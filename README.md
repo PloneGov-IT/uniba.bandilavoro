@@ -25,6 +25,7 @@ Esempio di architettura base di un bando:
 > >
 > > Profilo "Assistente di laboratorio"
 > > Rettifica ai dati del Bando con DD. 90/2013
+> >
 
 Con questo esempio si è ipotizzato un bando pubblicato per la ricerca di 2 profili professionali. In seguito sono state apportate due rettifiche: una per i dati del bando, la secondo per i dati strettamente legati al profilo (ad esempio il compenso).
 
