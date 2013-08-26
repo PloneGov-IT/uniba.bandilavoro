@@ -8,6 +8,8 @@ Questo prodotto nasce dall'esigenza di avere un sistema per la pubblicazione del
 
 Si è partiti dall'idea che un bando debba raccogliere le informazioni principali, mentre quelle di dettaglio appartengono all'entità "Profilo" (uno o più) ricercato. Inoltre esiste la necessità di tener traccia delle rettifiche apportate con apposito decreto ai bandi di concorso, e per questo è previsto un oggetto apposito.
 
+**Questo prodotto non è usato a pieno regime. E' da considerarsi in beta-version.**
+
 Architettura
 ------------
 Il pacchetto è quindi costituito, fondamentalmente, da tre nuovi "tipi" di oggetto (archetypes):
@@ -25,7 +27,8 @@ Esempio di architettura base di un bando:
 > >
 > > Profilo "Assistente di laboratorio"
 > > Rettifica ai dati del Bando con DD. 90/2013
-> >
+> 
+
 
 Con questo esempio si è ipotizzato un bando pubblicato per la ricerca di 2 profili professionali. In seguito sono state apportate due rettifiche: una per i dati del bando, la secondo per i dati strettamente legati al profilo (ad esempio il compenso).
 
@@ -35,4 +38,9 @@ TO-DO
 + Internazionalizzazione tramite utilizzo di 18n
 + Automatizzare la modifica dell'oggetto Bando/Profilo una volta aggiunta una Rettifica
 + Ottimizzazione del meccanismo di 
+
+##  Autore
++ Vito Falco - Università degli Studi di Bari Aldo Moro, vito.falco@uniba.it
+Meenzione d'onore a 
++ Alessandro Ceglie - Università degli Studi di Bari Aldo Moro, alessandro.ceglie@uniba.it
 
