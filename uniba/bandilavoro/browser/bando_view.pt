@@ -46,6 +46,17 @@
 				<metal:renderdd use-macro="context/@@bandilavoro_macros/renderdd" />
 			</tal:dd>
 		</table>
+		<table tal:define="allegati view/allegatiAlBando"
+			   tal:condition="allegati"
+			   id="bandilavoro-bando-allegati" class="bandilavoro-table">
+			<caption>Allegati al bando</caption>
+			<tr tal:repeat="allegato allegati">
+				<td>
+					<b tal:content="allegato/Title" /><br/>
+					<metal:field use-macro="python:allegato.getObject().widget('file', mode='view')" />
+				</td>
+			</tr>
+		</table>
 		<tal:blockrettifiche define="lerettifiche view/oggettiDiRettifica"
 		                     condition="lerettifiche">
 			<table id="bandilavoro-rettifica" class="bandilavoro-table">
