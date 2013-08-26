@@ -1,0 +1,27 @@
+Metadata-Version: 1.1
+Name: uniba.bandilavoro
+Version: 0.1
+Summary: Add-on per la gestione delle pubblicazione di bandi cococo/pro/autonomo per le esigenze dei Dipartimenti di ricerca e non
+Home-page: http://www.uniba.it
+Author: Vito Falco - Universita' degli studi di Bari Aldo Moro
+Author-email: vito.falco@uniba.it
+License: GPL
+Description: Introduction
+        ============
+        
+        
+        
+        This product may contain traces of nuts.
+        
+        Changelog
+        =========
+        
+        0.1dev (unreleased)
+        -------------------
+        
+        - Initial release
+        
+Keywords: universita,istruzione,bandi
+Platform: UNKNOWN
+Classifier: Framework :: Plone
+Classifier: Programming Language :: Python
