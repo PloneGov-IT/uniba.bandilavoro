@@ -21,13 +21,17 @@ Il pacchetto è quindi costituito, fondamentalmente, da tre nuovi "tipi" di ogge
 Tutti e tre questi oggetti sono di tipo *Folderish*, ovvero sono contenitori. *Profilo* e *Rettifica* non possono essere aggiunti se non nella cartella-oggetto *Bando*. Questo si rende necessario poichè un Bando può avere più Profili ricercati, e le Rettifiche possono riguardare (e quindi aggiunte) sia il Bando sia il Profilo.
 
 Esempio di architettura base di un bando:
-> Bando DD.89/2013 per la ricerca di personale
-> > Rettifica ai dati del Bando con DD. 90/2013
-> > Profilo "Tecnico di Laboratorio biochimico"
-> > > Rettifica al profilo per mero errore materiale DD. 91/2013
-> >
-> > Profilo "Assistente di laboratorio"
-> 
+
+• DD.89/2013 per la ricerca di personale
+
+––––––• Rettifica ai dati del Bando con DD. 90/2013
+
+––––––• Profilo "Tecnico di Laboratorio biochimico"
+
+–––––––––• Rettifica al profilo per mero errore materiale DD. 91/2013
+
+––––––• Profilo "Assistente di laboratorio"
+
 
 
 Con questo esempio si è ipotizzato un bando pubblicato per la ricerca di 2 profili professionali. In seguito sono state apportate due rettifiche: una per i dati del bando, la secondo per i dati strettamente legati al profilo (ad esempio il compenso).
