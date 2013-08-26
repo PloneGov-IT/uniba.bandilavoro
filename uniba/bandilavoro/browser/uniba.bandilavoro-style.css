@@ -7,6 +7,7 @@ table.bandilavoro-table th {
     padding: 4px;
     border-bottom: 2px solid #bbb;
     vertical-align: top;
+    text-align: left;
 }
 table.bandilavoro-table td {
     padding: 4px;
