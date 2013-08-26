@@ -3,7 +3,7 @@ import os
 
 version = '0.1alpha'
 
-setup(name='Bandi di lavoro cococo/pro/autonomo per le esigenze dei Dipartimenti',
+setup(name='uniba.bandilavoro',
       version=version,
       description="Add-on per la gestione delle pubblicazione di bandi cococo/pro/autonomo per le esigenze dei Dipartimenti di ricerca e non",
       long_description=open("README.txt").read() + "\n" +
