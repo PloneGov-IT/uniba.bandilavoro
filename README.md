@@ -36,6 +36,12 @@ Esempio di architettura base di un bando:
 
 Con questo esempio si è ipotizzato un bando pubblicato per la ricerca di 2 profili professionali. In seguito sono state apportate due rettifiche: una per i dati del bando, la secondo per i dati strettamente legati al profilo (ad esempio il compenso).
 
+Installazione
+-------------
+Questo pacchetto è progettato per versioni di Plone 4.x. Il pacchetto è da installare con metodo canonico tramite aggiunta nella lista degli *eggs* del buildout.
+
+Una volta installato, apparirà una nuova voce di menu nel "Pannello di controllo": qui vanno settati i dipartimenti, le tipologie contrattuali e i tipi di profilo.
+
 
 TO-DO
 =====
