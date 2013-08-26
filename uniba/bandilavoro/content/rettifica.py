@@ -57,9 +57,14 @@ class Rettifica(base.ATCTContent):
     def index_html(self):
         """ redirige sul contenitore di tipo bando 
             richiamando il metodo mioURL presente solo in tale oggetto """
+        portal_tools = getMultiAdapter((self, self.REQUEST), name="plone_tools")
         response = self.REQUEST.response
-        urlbando = self.mioURL()
-        return response.redirect(urlbando, status=303)
+        # in caso di editore allora passo la view standard
+        if portal_tools.membership().checkPermission('Modify portal content',self):
+            return response.redirect(self.absolute_url()+'/base_view')
+        else:            
+            urlbando = self.mioURL()
+            return response.redirect(urlbando, status=303)
     
     def getCampiDaRettificare(self):
         """ ottengo i campi chiamando il metodo getCampi """
