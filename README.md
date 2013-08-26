@@ -22,11 +22,11 @@ Tutti e tre questi oggetti sono di tipo *Folderish*, ovvero sono contenitori. *P
 
 Esempio di architettura base di un bando:
 > Bando DD.89/2013 per la ricerca di personale
+> > Rettifica ai dati del Bando con DD. 90/2013
 > > Profilo "Tecnico di Laboratorio biochimico"
 > > > Rettifica al profilo per mero errore materiale DD. 91/2013
 > >
 > > Profilo "Assistente di laboratorio"
-> > Rettifica ai dati del Bando con DD. 90/2013
 > 
 
 
@@ -37,10 +37,13 @@ TO-DO
 =====
 + Internazionalizzazione tramite utilizzo di 18n
 + Automatizzare la modifica dell'oggetto Bando/Profilo una volta aggiunta una Rettifica
-+ Ottimizzazione del meccanismo di 
++ Ottimizzazione del meccanismo di rettifica/annotazione
++ Compilazione guidata degli allegati
++ Test
 
 ##  Autore
 + Vito Falco - Università degli Studi di Bari Aldo Moro, vito.falco@uniba.it
+
 Meenzione d'onore a 
 + Alessandro Ceglie - Università degli Studi di Bari Aldo Moro, alessandro.ceglie@uniba.it
 
