@@ -29,6 +29,11 @@ table.bandilavoro-table tr:last-child td {
     border-bottom: none;
 }
 
+.field-datatermine div {
+    font-size: 18px;
+    font-weight: 600;
+}
+
 .camporettificato {
     font-size: 18px;
     font-weight: 600;

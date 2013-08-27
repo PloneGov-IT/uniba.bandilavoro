@@ -61,7 +61,7 @@
 				</tr>
 				<tr>
 					<th colspan="4">Oggetto della prestazione 
-					    <span tal:condition="python: 'compenso' in campiprofilorettificati" class="camporettificato">*</span>
+					    <span tal:condition="python: 'oggettoprestazione' in campiprofilorettificati" class="camporettificato">*</span>
 					</th>
 				</tr>
 				<tr>
@@ -71,7 +71,7 @@
 				<metal:blockrequisiti tal:condition="profilobj/getRequisitiprofilo">
     				<tr>
     					<th colspan="4">Requisiti per la partecipazione
-    					    <span tal:condition="python: 'compenso' in campiprofilorettificati" class="camporettificato">*</span>
+    					    <span tal:condition="python: 'requisitiprofilo' in campiprofilorettificati" class="camporettificato">*</span>
     					</th>
     				</tr>
     				<tr>
