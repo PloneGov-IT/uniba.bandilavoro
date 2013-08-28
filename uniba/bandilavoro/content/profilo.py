@@ -170,6 +170,10 @@ class Profilo(folder.ATFolder):
         else:            
             urlbando = self.mioURL()
             return response.redirect(urlbando, status=303)
+             
+    def datatermine(self):
+        """ test """
+        return self.aq_inner.aq_parent.getDatatermine()
     
     def getCampi(self):
         """ tramite questo metodo mostro i campi della presente classe 

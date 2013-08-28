@@ -20,12 +20,5 @@
       description="Installs the uniba.bandilavoro package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-  
-	<!--
-	<subscriber
-	  for=".interfaces.IRettifica
-	       Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-	  handler=".eventhandlers.afterRettifica"
-	  />
-	-->
+	
 </configure>

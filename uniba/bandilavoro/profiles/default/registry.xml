@@ -31,5 +31,17 @@
 	    <element>Didattico - TEST</element>
 	  </value>
 	</record>
-
+	
+	<records interface="plone.app.querystring.interfaces.IQueryField"
+	           prefix="plone.app.querystring.field.datatermine">
+	    <value key="title">Termine presentazione domande</value>
+	    <value key="description">Data di scadenza per la presentazione di domande per accesso a concorso</value>
+	    <value key="enabled">True</value>
+	    <value key="sortable">True</value>
+	    <value key="operations">
+	        <element>plone.app.querystring.operation.date.today</element>
+			<element>plone.app.querystring.operation.date.afterToday</element>
+	    </value>
+	    <value key="group">Dates</value>
+	  </records>
 </registry>
