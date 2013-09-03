@@ -2,8 +2,6 @@
 """
 from AccessControl import ClassSecurityInfo
 
-from plone.registry.interfaces import IRegistry
-
 from Products.Archetypes import atapi
 from Products.Archetypes.Schema import getSchemata
 from Products.Archetypes.utils import DisplayList

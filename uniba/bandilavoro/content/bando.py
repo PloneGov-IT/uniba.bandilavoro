@@ -4,8 +4,6 @@ from AccessControl import ClassSecurityInfo
 
 from DateTime.DateTime import DateTime
 
-from plone.registry.interfaces import IRegistry
-
 from Products.Archetypes import atapi
 from Products.Archetypes.utils import DisplayList
 from Products.Archetypes.Schema import getSchemata
@@ -13,7 +11,7 @@ from Products.ATContentTypes.content import folder
 from Products.ATContentTypes.content import schemata
 from Products.CMFCore import permissions
 
-from uniba.bandilavoro.interfaces import IBando, ISettingsBandi
+from uniba.bandilavoro.interfaces import IBando
 from uniba.bandilavoro.config import PROJECTNAME
 from uniba.bandilavoro import bandiMessageFactory as _
 
@@ -212,6 +210,7 @@ class Bando(folder.ATFolder):
     
     title = atapi.ATFieldProperty('title')
     description = atapi.ATFieldProperty('description')
+    datatermine = atapi.ATFieldProperty('datatermine')
     
     def mioURL(self):
         """ tramite questo metodo restituisco l'url dell'oggetto di tipo bando
@@ -233,27 +232,21 @@ class Bando(folder.ATFolder):
         dl.fromList([(x.getName(), x.widget.Label('default').default) for x in campi if hasattr(x.widget.Label('default'), 'default')])
         return dl
     
-    # ottengo le tipologie contrattuali mappate dal pannello di controllo
     def getDipartimento(self):
         """ ottengo la lista dei dipartimenti settata in pannello di configurazione formato DisplayList"""
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(ISettingsBandi)
-        dipartimenti = settings.settingDipartimenti
-        dl = DisplayList()
-        for x in dipartimenti:            
-            dl.add(x,x)
-        return dl
+        dipartimenti = DisplayList()
+        dipartimenti.add('', _(u'-- seleziona --'))
+        for dipartimento in self.aq_parent.getElencodipartimenti():
+            dipartimenti.add(dipartimento, dipartimento)
+        return dipartimenti
     
-    # ottengo le tipologie contrattuali mappate dal pannello di controllo
     def getTipologiacontratto(self):
         """ ottengo le tipologie contrattuali"""
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(ISettingsBandi)
-        tipocontratto = settings.settingTipocontratto
-        dl = DisplayList()
-        for x in tipocontratto:            
-            dl.add(x,x)
-        return dl
+        tipologiecontrattuali = DisplayList()
+        tipologiecontrattuali.add('', _(u'-- seleziona --'))
+        for tipo in self.aq_parent.getElencotipologiecontrattuali():
+            tipologiecontrattuali.add(tipo, tipo)
+        return tipologiecontrattuali
     
     # nascondo gli schemata che non servono
     security = ClassSecurityInfo()

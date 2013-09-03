@@ -2,6 +2,9 @@
 <rolemap>
   <permissions>
     <!-- -*- extra stuff goes here -*- -->
+    <permission name="uniba.bandilavoro: Add CartellaBandidiLavoro" acquire="False">
+      <role name="Manager" />
+    </permission>
     <permission name="uniba.bandilavoro: Add Rettifica" acquire="False">
       <role name="Manager" />
       <role name="Contributor" />

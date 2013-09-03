@@ -1,47 +1,4 @@
 <?xml version="1.0"?>
 <registry>
- 	<records interface="uniba.bandilavoro.interfaces.ISettingsBandi" />
-	<record field="settingDipartimenti" interface="uniba.bandilavoro.interfaces.settings.ISettingsBandi" name="uniba.bandilavoro.interfaces.settings.ISettingsBandi.settingDipartimenti">
-	  <field type="plone.registry.field.List">
-	    <description>Uno per linea</description>
-	    <title>Dipartimenti</title>
-	    <value_type type="plone.registry.field.TextLine" />
-	  </field>
-	  <value>
-	    <element>Dipartimento - TEST</element>
-	  </value>
-	</record>
-	<record field="settingTipocontratto" interface="uniba.bandilavoro.interfaces.settings.ISettingsBandi" name="uniba.bandilavoro.interfaces.settings.ISettingsBandi.settingTipocontratto">
-	  <field type="plone.registry.field.List">
-	    <description>Uno per linea</description>
-	    <title>Tipologia contrattuale</title>
-	    <value_type type="plone.registry.field.TextLine" />
-	  </field>
-	  <value>
-	    <element>Cococo - TEST</element>
-	  </value>
-	</record>
-	<record field="settingTipoprofilo" interface="uniba.bandilavoro.interfaces.settings.ISettingsBandi" name="uniba.bandilavoro.interfaces.settings.ISettingsBandi.settingTipoprofilo">
-	  <field type="plone.registry.field.List">
-	    <description>Uno per linea</description>
-	    <title>Tipologia profilo</title>
-	    <value_type type="plone.registry.field.TextLine" />
-	  </field>
-	  <value>
-	    <element>Didattico - TEST</element>
-	  </value>
-	</record>
-	
-	<records interface="plone.app.querystring.interfaces.IQueryField"
-	           prefix="plone.app.querystring.field.datatermine">
-	    <value key="title">Termine presentazione domande</value>
-	    <value key="description">Data di scadenza per la presentazione di domande per accesso a concorso</value>
-	    <value key="enabled">True</value>
-	    <value key="sortable">True</value>
-	    <value key="operations">
-	        <element>plone.app.querystring.operation.date.today</element>
-			<element>plone.app.querystring.operation.date.afterToday</element>
-	    </value>
-	    <value key="group">Dates</value>
-	  </records>
+
 </registry>

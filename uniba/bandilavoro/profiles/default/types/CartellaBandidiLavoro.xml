@@ -1,26 +1,24 @@
 <?xml version="1.0"?>
-<object name="Bando"
+<object name="CartellaBandidiLavoro"
    meta_type="Factory-based Type Information with dynamic views"
    i18n:domain="uniba.bandilavoro" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
-  <property name="title" i18n:translate="">Bando</property>
+  <property name="title" i18n:translate="">Cartella Bandi di lavoro</property>
   <property name="description"
-    i18n:translate="">Bando di selezione per personale</property>
-  <property name="content_meta_type">Bando</property>
-  <property name="content_icon">++resource++ico-megafono.png</property>
+    i18n:translate="">Cartella che raccoglie tutti i Bandi di lavoro dei Dipartimenti</property>
+  <property name="content_meta_type">CartellaBandidiLavoro</property>
+  <property name="content_icon">++resource++ico-cartellabandi.png</property>
   <property name="product">uniba.bandilavoro</property>
-  <property name="factory">addBando</property>
+  <property name="factory">addCartellaBandidiLavoro</property>
   <property name="immediate_view">atct_edit</property>
-  <property name="global_allow">False</property>
+  <property name="global_allow">True</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
-	  <element value="File"/>
-	  <element value="Profilo"/>
-	  <element value="Rettifica"/>
+	  <element value="Bando"/>
   </property>
   <property name="allow_discussion">False</property>
-  <property name="default_view">bando_view</property>
+  <property name="default_view">base_view</property>
   <property name="view_methods">
-    <element value="bando_view" />
+    <element value="cartellabandi_view" />
   </property>
   <alias from="(Default)" to="(dynamic view)" />
   <alias from="edit" to="atct_edit" />

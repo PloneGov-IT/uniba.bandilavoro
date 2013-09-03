@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="uniba.bandilavoro">
+
+<tal:js metal:fill-slot="javascript_head_slot"
+        tal:define="portal context/@@plone_portal_state/portal">
+
+    <script type="text/javascript"
+            tal:attributes="src string:${portal/absolute_url}/++resource++jquery.datatables.js">
+    </script>
+
+    <script type="text/javascript"
+            tal:attributes="src string:${portal/absolute_url}/++resource++bandilavoro.js">
+    </script>
+
+</tal:js>
+
+<metal:slot fill-slot="style_slot"
+            tal:define="portal context/@@plone_portal_state/portal">
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          tal:attributes="href string:${portal/absolute_url}/++resource++jquery.datatables/media/css/jquery.dataTables.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          tal:attributes="href string:${portal/absolute_url}/++resource++jquery.datatables/extras/TableTools/media/css/TableTools.css">
+
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          tal:attributes="href string:${portal/absolute_url}/++resource++dataTableFix.css">
+</metal:slot>
+
+<body>
+    <div metal:fill-slot="main"
+         class="cartellabandilavoro">
+        <tal:main-macro metal:define-macro="main"
+                        tal:define="brains view/contenuti_folder;
+                                    toLocalizedTime nocall:context/@@plone/toLocalizedTime;">
+
+            <h1 tal:content="here/Title" class="documentFirstHeading"/>
+            <div id="parent-fieldname-description" tal:content="here/Description" class="documentDescription"/>
+
+            <div id="export_csv">
+                <a class="context"
+                   i18n:translate="export_csv_label"
+                   tal:attributes="href string:${here/absolute_url}/@@csv_export">
+                   CSV Export
+                 </a>
+            </div>
+
+            <table id='bandilavorotable' class="">
+                <thead>
+                    <tr>
+                       <th >Titolo</th>
+                       <th >N.posti</th>
+                       <th>Tipologia profilo</th>
+                       <th>Durata</th>
+                       <th>Termine</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tal:items tal:repeat="brain brains">
+                       <tr>
+                           <td>
+                              <a tal:attributes="href brain/getURL;
+                                                 class string:state-${brain/review_state}">
+                                <tal:title content="brain/Title"></tal:title>
+                              </a>
+                           </td>
+                           <td tal:content="brain/nposti">Numero posti</td>
+                           <td tal:content="brain/tipoprofilo">Tipologia profilo</td>
+                           <td tal:content="string:${brain/durata}&nbsp;${brain/durataespressain}">Durata</td>
+                           <td tal:content="python:context.toLocalizedTime(brain.datatermine)">Termine</td>
+                       </tr>
+                   </tal:items>
+                </tbody>
+            </table>
+        </tal:main-macro>
+    </div>
+</body>
+</html>

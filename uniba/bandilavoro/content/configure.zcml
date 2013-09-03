@@ -33,5 +33,15 @@
 		id="uniba.bandilavoro.AddRettifica"
 		title="uniba.bandilavoro: Add Rettifica"
 	/>
+	<class class=".cartellabandidilavoro.CartellaBandidiLavoro">
+		<require
+		permission="zope2.View"
+		interface="..interfaces.ICartellaBandidiLavoro"
+		/>
+	</class>
+	<permission
+		id="uniba.bandilavoro.AddCartellaBandidiLavoro"
+		title="uniba.bandilavoro: Add CartellaBandidiLavoro"
+	/>
 
 </configure>

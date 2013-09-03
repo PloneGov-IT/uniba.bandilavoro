@@ -4,15 +4,6 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="uniba.bandilavoro">
     
-   <include package="plone.app.registry" />
-
-  <!-- Control panel -->
-  <browser:page
-	    name="bandilavoro-settings"
-	    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-	    class=".controlpanel.BandiSettingsControlPanel"
-	    permission="cmf.ManagePortal"
-	    />
 
   <browser:page
 	    name="bando_view"
@@ -32,10 +23,22 @@
       for="*"
       class=".views.rettifiche"
       permission="zope2.Public" />
+      
+  <browser:page
+        for="uniba.bandilavoro.interfaces.ICartellaBandidiLavoro"
+        name="cartellabandi_view"
+        class=".cartellabandiview.cartellabandiView"
+        template="cartellabandiview.pt"
+        allowed_interface=".cartellabandiview.ICartellabandiView"
+        permission="zope.Public"
+        />
 
-   <browser:resource
-    	name="ico-bando.png"
-		file="ico-bando.png" />
+   	<browser:resource
+	    	name="ico-cartellabandi.png"
+			file="ico-cartellabandi.png" />
+	<browser:resource
+    	name="ico-megafono.png"
+		file="ico-megafono.png" />
 	<browser:resource
 	   	name="ico-profilo.png"
 		file="ico-profilo.png" />
@@ -45,5 +48,11 @@
 	<browser:resource
 	   	name="uniba.bandilavoro-style.css"
 		file="uniba.bandilavoro-style.css" />
+	<browser:resource
+	   	name="dataTableFix.css"
+		file="dataTableFix.css" />
+    <browser:resource
+	   	name="bandilavoro.js"
+		file="bandilavoro.js" />
 		
 </configure>

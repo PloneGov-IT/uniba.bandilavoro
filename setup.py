@@ -25,7 +25,7 @@ setup(name='uniba.bandilavoro',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'plone.app.registry',
+          'collective.js.datatables',
           # -*- Extra requirements: -*-
       ],
       entry_points="""

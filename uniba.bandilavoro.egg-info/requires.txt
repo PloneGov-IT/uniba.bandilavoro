@@ -1,2 +1,2 @@
 setuptools
-plone.app.registry
+collective.js.datatables

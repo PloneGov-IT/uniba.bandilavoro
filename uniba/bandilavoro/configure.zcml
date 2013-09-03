@@ -20,5 +20,17 @@
       description="Installs the uniba.bandilavoro package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+
+  <utility
+      provides="uniba.bandilavoro.interfaces.profilo.IMoneyFormat"
+      factory=".utilities.MoneyFormat" />
+
+  <!-- Questo re-indexa l'index fittizio 'datatermine' attribuito al Profilo poiche' tale oggetto ne ottiene 
+  il valore dal proprio genitore -->
+  <subscriber
+    for=".interfaces.bando.IBando
+         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+    handler=".reindexa.reDatatermine"
+    />
 	
 </configure>

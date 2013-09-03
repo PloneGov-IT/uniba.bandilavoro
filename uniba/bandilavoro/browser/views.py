@@ -1,13 +1,11 @@
 from Acquisition import aq_inner
 
-from plone.registry.interfaces import IRegistry
-
 from Products.CMFCore.utils import getToolByName
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.Five.browser import BrowserView
 
-from uniba.bandilavoro.interfaces import IBando, ISettingsBandi
+from uniba.bandilavoro.interfaces import IBando
 
 from zope.component import getMultiAdapter, getUtility
 
@@ -21,10 +19,6 @@ class bandoView(BrowserView):
     def __call__(self):
         return self.render()
         
-    def getDipartimentobando(self,dipartimentoinbreve):
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(ISettingsBandi)
-        dipartimenti = settings.settingDipartimenti
         
     def oggettiDiRettifica(self):
         """ ritorna la lista di tutti gli oggetti Rettifica presenti nel bando e nei profili annessi 

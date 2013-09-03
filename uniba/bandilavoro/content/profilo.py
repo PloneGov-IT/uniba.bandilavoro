@@ -2,8 +2,6 @@
 """
 from AccessControl import ClassSecurityInfo
 
-from plone.registry.interfaces import IRegistry
-
 from Products.Archetypes import atapi
 from Products.Archetypes.Schema import getSchemata
 from Products.Archetypes.utils import DisplayList
@@ -11,7 +9,7 @@ from Products.ATContentTypes.content import folder
 from Products.ATContentTypes.content import schemata
 from Products.CMFCore import permissions
 
-from uniba.bandilavoro.interfaces import IProfilo, ISettingsBandi
+from uniba.bandilavoro.interfaces import IProfilo
 from uniba.bandilavoro.config import PROJECTNAME
 from uniba.bandilavoro import bandiMessageFactory as _
 
@@ -89,7 +87,7 @@ ProfiloSchema = folder.ATFolderSchema.copy() + atapi.Schema((
     atapi.StringField('durataespressain',
           required=True,
           searchable=False,
-          vocabulary=(('gg', 'giorni'),('mm', 'mese/1'),('aa', 'anno/i'),),
+          vocabulary='getArchi',
           widget = atapi.SelectionWidget(
                     label = _(u'label_profilo_durataespressain', default=u'Durata espressa in '),
                     )),
@@ -171,7 +169,7 @@ class Profilo(folder.ATFolder):
             urlbando = self.mioURL()
             return response.redirect(urlbando, status=303)
              
-    def datatermine(self):
+    def getDatatermine(self):
         """ test """
         return self.aq_inner.aq_parent.getDatatermine()
     
@@ -188,7 +186,27 @@ class Profilo(folder.ATFolder):
         # testo anche se hanno l'attributo default posto
         dl.fromList([(x.getName(), x.widget.label.default) for x in campi if hasattr(x.widget.label, 'default')])
         return dl
+        
+    def getTipologiaprofilo(self):
+        """ ottengo le tipologie di profilo in formato DisplayList"""
+        tipiprofilo = DisplayList()
+        tipiprofilo.add('', _(u'-- seleziona --'))
+        for tipo in self.aq_parent.getElencotipologieprofilo():
+            tipiprofilo.add(tipo, tipo)
+        return tipiprofilo
     
+    def getArchi(self):
+        """ ottengo gli archi temporali in formato DisplayList"""
+        archi = DisplayList()
+        archi.add('', _(u'-- seleziona --'))
+        for arco in self.aq_parent.getElencoarchi():
+            archi.add(arco, arco)
+        return archi
+        
+    def datatermine(self):
+        """ ottengo la data di termine del bando che contiene il profilo """
+        return self.aq_parent.getDatatermine()
+                
     # nascondo gli schemata che non servono
     security = ClassSecurityInfo()
     security.declareProtected(permissions.View, 'Schemata')
@@ -215,16 +233,11 @@ class Profilo(folder.ATFolder):
     title = atapi.ATFieldProperty('title')
     description = atapi.ATFieldProperty('description')
     nposti = atapi.ATFieldProperty('nposti')
+    tipoprofilo = atapi.ATFieldProperty('tipoprofilo')
+    durata = atapi.ATFieldProperty('durata')
+    durataespressain = atapi.ATFieldProperty('durataespressain')
+    decretoapprovazioneatti = atapi.ATFieldProperty('decretoapprovazioneatti')
+    
 
-    # ottengo le tipologie di profilo mappate dal pannello di controllo
-    def getTipologiaprofilo(self):
-        """ ottengo le tipologie di profilo in formato DisplayList"""
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(ISettingsBandi)
-        tipoprofilo = settings.settingTipoprofilo
-        dl = DisplayList()
-        for x in tipoprofilo:
-            dl.add(x,x)
-        return dl
 
 atapi.registerType(Profilo, PROJECTNAME)
