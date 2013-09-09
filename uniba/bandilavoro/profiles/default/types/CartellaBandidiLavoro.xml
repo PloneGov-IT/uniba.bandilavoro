@@ -16,7 +16,7 @@
 	  <element value="Bando"/>
   </property>
   <property name="allow_discussion">False</property>
-  <property name="default_view">base_view</property>
+  <property name="default_view">cartellabandi_view</property>
   <property name="view_methods">
     <element value="cartellabandi_view" />
   </property>

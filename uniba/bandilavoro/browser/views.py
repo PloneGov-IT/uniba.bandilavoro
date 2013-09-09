@@ -54,3 +54,17 @@ class rettifiche(BrowserView):
             campirettificati = campirettificati.union(set(x.getObject().getRettificapercampi()))
             
         return tuple(campirettificati)
+        
+        
+class testProfiliView(BrowserView):
+    """testo se esiste almeno un oggetto Profilo nel bando """
+    
+    def __call__(self):
+        context = self.context
+        profili = context.getFolderContents(contentFilter={'portal_type':'Profilo'})
+        if profili:
+            # si puo' pubblicare
+            return 1
+        else:
+            # non si puo' pubblicare
+            return 0

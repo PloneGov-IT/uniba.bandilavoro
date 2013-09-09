@@ -33,6 +33,13 @@
         permission="zope.Public"
         />
 
+   <browser:view
+	    name="testprofili"
+	    for="uniba.bandilavoro.interfaces.IBando"
+	    class=".views.testProfiliView"
+	    permission="zope2.Public"
+	    />
+
    	<browser:resource
 	    	name="ico-cartellabandi.png"
 			file="ico-cartellabandi.png" />

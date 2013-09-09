@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name="portal_workflow" meta_type="Plone Workflow Tool">
+ <object name="bandilavoro_publication_workflow" meta_type="Workflow"/>
+ <bindings>
+  <type type_id="Bando">
+   <bound-workflow workflow_id="bandilavoro_publication_workflow"/>
+  </type>
+  <type type_id="Profilo"/>
+ </bindings>
+</object>

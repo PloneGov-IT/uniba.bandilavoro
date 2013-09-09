@@ -13,8 +13,11 @@ uniba.bandilavoro.egg-info/requires.txt
 uniba.bandilavoro.egg-info/top_level.txt
 uniba/bandilavoro/__init__.py
 uniba/bandilavoro/config.py
+uniba/bandilavoro/reindexa.py
 uniba/bandilavoro/tests.py
+uniba/bandilavoro/utilities.py
 uniba/bandilavoro/browser/__init__.py
+uniba/bandilavoro/browser/cartellabandiview.py
 uniba/bandilavoro/browser/views.py
 uniba/bandilavoro/content/__init__.py
 uniba/bandilavoro/content/bando.py
